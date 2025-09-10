@@ -24,7 +24,7 @@ secondary tables:
 API Integration:
 - Free Dictionary API (need word and definition)
 
-## Guidelines for dev
+## 1. Guidelines for dev
 1. Backend Controller Guide
 
 post("/register") - user register
@@ -48,11 +48,11 @@ get("/leaderboard") - get all leaderboards with user
 put("/leaderboard) - add or increase users score on the leaderboard
 [user_id, score]
 
-get("/word") - get a word from an api with definition
+- [x] get("/word") - get a word from an api with definition
 [UNSURE BUT JSON word, definition]
 
 
-2. Backend Function guide
+## 2. Backend Function guide
 addUser(username, email, password)->User
 [Create user in db]
 
@@ -74,7 +74,7 @@ addScoreToLeaderboard(leaderboard)->leaderboard
 getLeaderboard()->List<Leaderboard>
 [Get leaderboard score and also join user_id with username and ORDER DESC, LIMIT 50]
 
-getWord()-> Word{word:"word", definition:"definition"}
+- [x] getWord()-> Word{word:"word", definition:"definition"}
 
 [Currently have options from strategy below (after function: read db for used word today, get from game):
    1. Save the word in db and select random
