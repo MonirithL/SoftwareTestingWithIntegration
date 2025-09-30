@@ -1,5 +1,6 @@
 package com.finalproj.amr.middleware;
 
+import com.finalproj.amr.jsonObject.UserJwt;
 import com.finalproj.amr.utils.JwtUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -37,6 +38,8 @@ public class JwtAuthFilter implements Filter {
             if(jwtUtils.validateToken(authCookie)){
                 //okay, user is legit
                 HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+                UserJwt user = jwtUtils.getUserJwt(authCookie);
+                httpRequest.setAttribute("user", user);
                 filterChain.doFilter(httpRequest,httpResponse);
             }else{
             //bad user
