@@ -5,9 +5,11 @@ import com.finalproj.amr.jsonObject.UserJwt;
 import com.finalproj.amr.service.UserService;
 import com.finalproj.amr.utils.JwtUtils;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,15 +24,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String Register(@RequestParam String username, @RequestParam String email, @RequestParam String password, HttpServletResponse res){
-        User newUser = new User(username, email,password);
+    public User Register(@RequestBody Map<String, String> body, HttpServletResponse res){
+        User newUser = new User(body.get("username"), body.get("email"),body.get("password"));
         User createdUser = userService.addUser(newUser);
         res.setStatus(200);
-        return "registered user";
+        return createdUser;
     }
     @PostMapping("/login")
-    public String Login(@RequestParam String email, @RequestParam String password, HttpServletResponse response){
-        Optional<User> user = userService.checkUserLogin(email,password);
+    public String Login(@RequestBody Map<String,String> body, HttpServletResponse response){
+        Optional<User> user = userService.checkUserLogin(body.get("email"),body.get("password"));
         if (user.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return "Invalid email or password";
@@ -41,12 +43,12 @@ public class AuthController {
         Cookie cookie = new Cookie("access-token", token);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
-        cookie.setPath("/");
+        cookie.setPath("/api");
         cookie.setMaxAge(24 * 60 * 60);
         response.addCookie(cookie);
-        return "Login successful";
+        return "Login successful "+token;
     }
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String Logout(HttpServletResponse response){
         Cookie cookie = new Cookie("access-token", null);
         cookie.setHttpOnly(true);

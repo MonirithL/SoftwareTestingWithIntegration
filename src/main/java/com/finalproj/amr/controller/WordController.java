@@ -26,6 +26,9 @@ public class WordController {
 
     public WordController() {
         cache_word = new HashMap<>();
+    }
+    @PostConstruct
+    public void init() {
         word_availability_checker();
     }
 
@@ -44,15 +47,16 @@ public class WordController {
 
     @Scheduled(fixedDelay = 5000)
     void word_availability_checker() {
-
-        while (cache_word.size() < 10){
+        int sanity = 0;
+        while (cache_word.size() < 10 && sanity<1000){
             Word word = Word.generateWord();
-            if(word!= null && !word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())){
+            if(!word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())){
                 cache_word.put(word.getWord(),word);
                 System.out.println("UPDATED ----------------------- CACHE WORDS CONTAINS "+cache_word.size()+" items");
             }
+            sanity++;
         }
-
+        System.out.println("Tries of "+ sanity+ " times!");
     }
 }
 
