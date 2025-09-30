@@ -4,10 +4,7 @@ import com.finalproj.amr.entity.User;
 import com.finalproj.amr.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -26,11 +23,8 @@ public class UserController {
         return new ResponseEntity<>(new_user, HttpStatus.CREATED);
     }
 
-    @PostMapping
-    public ResponseEntity<> loginUser(@RequestBody User user){
-        Optional<User> user_exists = userService.findUserByEmail(user.getEmail());
-        if(user_exists.isPresent()){
-            //do sth
-        }
+    @GetMapping("/test")
+    public ResponseEntity<String> testing(){
+        return new ResponseEntity<>("hello", HttpStatus.ACCEPTED);
     }
 }

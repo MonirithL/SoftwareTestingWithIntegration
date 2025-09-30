@@ -20,4 +20,17 @@ public class UserService {
     public Optional<User> findUserByEmail(String email){
         return userRepository.findByEmail(email);
     }
+    public Optional<User> checkUserLogin(String email, String password){
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isEmpty()){
+            return Optional.empty();
+        }
+        User actualUser = user.get();
+        if(!password.equals(actualUser.getPassword())){
+            return Optional.empty();
+        }else{
+            return Optional.of(actualUser);
+        }
+
+    }
 }

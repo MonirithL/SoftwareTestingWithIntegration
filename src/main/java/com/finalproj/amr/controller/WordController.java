@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 import java.util.*;
 
 @RestController
-@RequestMapping("/word")
+@RequestMapping("/api/word")
 public class WordController {
 
     private Map<String, Word> cache_word;
