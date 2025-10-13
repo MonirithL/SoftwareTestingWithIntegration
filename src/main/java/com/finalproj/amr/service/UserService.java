@@ -1,7 +1,11 @@
 package com.finalproj.amr.service;
 
 import com.finalproj.amr.entity.User;
+import com.finalproj.amr.jsonEntity.UserJwt;
 import com.finalproj.amr.repository.UserRepository;
+import com.finalproj.amr.utils.JwtUtils;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +14,12 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final JwtUtils jwtUtils;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,JwtUtils jwtUtils) {
+
         this.userRepository = userRepository;
+        this.jwtUtils = jwtUtils;
     }
 
     public User addUser(User user) {
@@ -43,5 +50,15 @@ public class UserService {
             return Optional.of(actualUser);
         }
 
+    }
+    public void addJwtCookie(HttpServletResponse response, User user) {
+        UserJwt userJwt = new UserJwt(user.getId(), user.getUsername(), user.getEmail());
+        String token = jwtUtils.generateToken(userJwt);
+        Cookie cookie = new Cookie("access-token", token);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/api");
+        cookie.setMaxAge(24 * 60 * 60);
+        response.addCookie(cookie);
     }
 }

@@ -14,13 +14,19 @@ import java.util.*;
 @RequestMapping("/api/word")
 public class WordController {
 
-    private WordService wordService = new WordService();
+    private WordService wordService;
 
     private Map<String, Word> cache_word;
     private final Random random = new Random(38917248);
 
-    public WordController() {
+    public Map<String, Word> getCache_word() {
+        return cache_word;
+    }
+
+    public WordController(WordService wordService) {
         cache_word = new HashMap<>();
+        this.wordService = wordService;
+
     }
     @PostConstruct
     public void init() {
@@ -35,19 +41,19 @@ public class WordController {
         return selected;
     }
 
-    @GetMapping("/test")
-    public List<Word> test(){
-        return new ArrayList<>(cache_word.values());
-    }
-
     @Scheduled(fixedDelay = 5000)
     void word_availability_checker() {
         int sanity = 0;
         while (cache_word.size() < 5 && sanity<1000){
-            Word word = WordService.generateWord();
-            if(!word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())){
-                cache_word.put(word.getWord(),word);
-                System.out.println("UPDATED ----------------------- CACHE WORDS CONTAINS "+cache_word.size()+" items");
+            Word word = wordService.generateWord();
+            if (word == null || word.getWord() == null || word.getDefinition() == null) {
+                sanity++;
+                continue;
+            }
+
+            if (!word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())) {
+                cache_word.put(word.getWord(), word);
+                System.out.println("UPDATED ----------------------- CACHE WORDS CONTAINS " + cache_word.size() + " items");
             }
             sanity++;
         }

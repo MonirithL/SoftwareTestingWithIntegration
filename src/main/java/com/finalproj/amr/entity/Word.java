@@ -16,6 +16,9 @@ public class Word{
         this.partOfSpeech = dict.getPartOfSpeech();
     }
 
+    public Word() {
+    }
+
     public String getWord() {
         return word;
     }
