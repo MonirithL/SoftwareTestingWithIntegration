@@ -25,6 +25,10 @@ public class JwtAuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+        if ("OPTIONS".equalsIgnoreCase(httpRequest.getMethod())) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
         String authCookie = null;
         if (httpRequest.getCookies() != null) {
             for (Cookie cookie : httpRequest.getCookies()) {
@@ -38,7 +42,7 @@ public class JwtAuthFilter implements Filter {
                 //okay, user is legit
                 HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
                 UserJwt user = jwtUtils.getUserJwt(authCookie);
-                httpRequest.setAttribute("user", user);
+                httpRequest.setAttribute("user_id", Integer.valueOf(user.getId()));
                 filterChain.doFilter(httpRequest,httpResponse);
             }else{
             //bad user
