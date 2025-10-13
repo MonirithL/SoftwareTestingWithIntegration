@@ -23,13 +23,6 @@ public class LeaderboardController {
     public List<Leaderboard> getLeaderBoard() {
         return leaderboardService.getLeaderBoard();
     }
-//    public LeaderboardController(GameService gameService) {
-//        this.gameService = gameService;
-//    }
-//
-//    @GetMapping
-//    public List<Map<String, Object>> getLeaderBoard() {
-//        return gameService.getLeaderBoard();
-//    }
+
 
 }
