@@ -1,4 +1,4 @@
-package com.finalproj.amr.jsonObject;
+package com.finalproj.amr.jsonEntity;
 
 import java.util.Objects;
 

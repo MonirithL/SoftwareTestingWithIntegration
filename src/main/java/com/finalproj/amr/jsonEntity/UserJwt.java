@@ -1,4 +1,4 @@
-package com.finalproj.amr.jsonObject;
+package com.finalproj.amr.jsonEntity;
 
 public class UserJwt {
     private int id;

@@ -1,6 +1,6 @@
 package com.finalproj.amr.controller;
 
-import com.finalproj.amr.Word;
+import com.finalproj.amr.entity.Word;
 import com.finalproj.amr.entity.Game;
 import com.finalproj.amr.entity.User;
 import com.finalproj.amr.service.GameService;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/game")

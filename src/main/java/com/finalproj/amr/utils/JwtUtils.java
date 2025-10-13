@@ -1,15 +1,11 @@
 package com.finalproj.amr.utils;
 
-import com.finalproj.amr.jsonObject.UserJwt;
+import com.finalproj.amr.jsonEntity.UserJwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class JwtUtils {

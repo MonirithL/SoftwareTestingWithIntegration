@@ -1,6 +1,5 @@
-package com.finalproj.amr.jsonObject;
+package com.finalproj.amr.jsonEntity;
 
-import com.finalproj.amr.Word;
 import com.google.gson.Gson;
 
 import java.io.IOException;

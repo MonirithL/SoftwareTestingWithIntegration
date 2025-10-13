@@ -1,11 +1,10 @@
 package com.finalproj.amr.controller;
 
 import com.finalproj.amr.entity.User;
-import com.finalproj.amr.jsonObject.UserJwt;
+import com.finalproj.amr.jsonEntity.UserJwt;
 import com.finalproj.amr.service.UserService;
 import com.finalproj.amr.utils.JwtUtils;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
