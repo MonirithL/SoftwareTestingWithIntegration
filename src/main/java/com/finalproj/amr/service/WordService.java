@@ -35,7 +35,7 @@ public class WordService {
         return fullurl;
     }
 
-    public static Word generateWord() {
+    public Word generateWord() {
         HttpClient httpClient = HttpClient.newHttpClient();
         Gson gson = new Gson();
 

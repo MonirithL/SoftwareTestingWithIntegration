@@ -16,7 +16,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtUtils jwtUtils;
 
-    public UserService(UserRepository userRepository, JwtUtils jwtUtils) {
+    public UserService(UserRepository userRepository,JwtUtils jwtUtils) {
+
         this.userRepository = userRepository;
         this.jwtUtils = jwtUtils;
     }
@@ -50,7 +51,6 @@ public class UserService {
         }
 
     }
-
     public void addJwtCookie(HttpServletResponse response, User user) {
         UserJwt userJwt = new UserJwt(user.getId(), user.getUsername(), user.getEmail());
         String token = jwtUtils.generateToken(userJwt);
