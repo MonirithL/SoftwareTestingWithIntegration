@@ -346,7 +346,7 @@ const Auth = () => {
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-sm text-muted-foreground">
-            Created with ❤️ by{" "}
+            Created by{" "}
             <span className="font-semibold text-foreground">
               Teng Rithrathanak, Lim Ankim, and Leng Monirith
             </span>
