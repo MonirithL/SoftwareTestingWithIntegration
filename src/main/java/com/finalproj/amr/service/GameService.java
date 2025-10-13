@@ -11,16 +11,21 @@ import java.util.Map;
 public class GameService {
 
     private final GameRepository gameRepository;
+    private final LeaderboardService leaderboardService;
 
 
-    public GameService(GameRepository gameRepository) {
+    public GameService(GameRepository gameRepository, LeaderboardService leaderboardService) {
         this.gameRepository = gameRepository;
-    }
-    public Game addGame(Game game) {
-        return gameRepository.save(game);
+        this.leaderboardService = leaderboardService;
     }
 
-    public List<Map<String, Object>> getLeaderBoard() {
-        return gameRepository.getLeaderBoard();
+    public Game addGame(Game game) {
+        Game savedGame = gameRepository.save(game);
+        leaderboardService.updateLeaderboard(savedGame.getUser());
+        return savedGame;
     }
+
+//    public List<Map<String, Object>> getLeaderBoard() {
+//        return gameRepository.getLeaderBoard();
+//    }
 }
