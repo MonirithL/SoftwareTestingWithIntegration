@@ -33,13 +33,13 @@ API Integration:
 1. Backend Controller Guide
 
 - [x] post("auth/register") - user register
-      [email, username, password]
+  [email, username, password]
 
 - [x] post("auth/login") - user login
-      [email, password]
+  [email, password]
 
 - [x] get("/api/authCheck) - protect user from nav if not logged in
-      [http cookie]
+  [http cookie]
 
 - [x] post("/auth/logout) = clear http cookie for /api
 
@@ -56,18 +56,18 @@ put("/leaderboard) - add or increase users score on the leaderboard
 [user_id, score]
 
 - [x] get("/word") - get a word from an api with definition
-      [UNSURE BUT JSON word, definition]
+  [UNSURE BUT JSON word, definition]
 
 ## 2. Backend Function guide
 
 - [x] addUser(username, email, password)->User
-      [Create user in db]
+  [Create user in db]
 
 - [x] login(email, password)->bool|jwt|session
-      [Read db and compare hash]
+  [Read db and compare hash]
 
 - [x] login-check(req, res)->status 200 | json ok
-      [Read the cookie, check if user exists]
+  [Read the cookie, check if user exists]
 
 addGame(game)-> Game
 [Create game in db, belonging to user_id]

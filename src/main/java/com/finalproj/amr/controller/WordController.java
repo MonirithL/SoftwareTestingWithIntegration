@@ -1,25 +1,20 @@
 package com.finalproj.amr.controller;
 
-import com.finalproj.amr.Word;
-import com.finalproj.amr.jsonObject.RandomWord;
-import com.google.gson.Gson;
+import com.finalproj.amr.entity.Word;
+import com.finalproj.amr.service.WordService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.net.*;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/word")
 public class WordController {
+
+    private WordService wordService = new WordService();
 
     private Map<String, Word> cache_word;
     private final Random random = new Random(38917248);
@@ -49,7 +44,7 @@ public class WordController {
     void word_availability_checker() {
         int sanity = 0;
         while (cache_word.size() < 10 && sanity<1000){
-            Word word = Word.generateWord();
+            Word word = WordService.generateWord();
             if(!word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())){
                 cache_word.put(word.getWord(),word);
                 System.out.println("UPDATED ----------------------- CACHE WORDS CONTAINS "+cache_word.size()+" items");

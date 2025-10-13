@@ -8,7 +8,7 @@ public class Leaderboard {
     @GeneratedValue
     private int id;
 
-    private int total_score;
+    private int totalScore;
     private String lastUpdated;
 
     @OneToOne
@@ -18,15 +18,15 @@ public class Leaderboard {
     public Leaderboard() {
     }
 
-    public Leaderboard(int total_score, String lastUpdated, User user) {
-        this.total_score = total_score;
+    public Leaderboard(int totalScore, String lastUpdated, User user) {
+        this.totalScore = totalScore;
         this.lastUpdated = lastUpdated;
         this.user = user;
     }
 
-    public Leaderboard(int id, int total_score, String lastUpdated, User user) {
+    public Leaderboard(int id, int totalScore, String lastUpdated, User user) {
         this.id = id;
-        this.total_score = total_score;
+        this.totalScore = totalScore;
         this.lastUpdated = lastUpdated;
         this.user = user;
     }
@@ -35,8 +35,8 @@ public class Leaderboard {
         return id;
     }
 
-    public int getTotal_score() {
-        return total_score;
+    public int getTotalScore() {
+        return totalScore;
     }
 
     public String getLastUpdated() {
@@ -51,8 +51,8 @@ public class Leaderboard {
         this.id = id;
     }
 
-    public void setTotal_score(int total_score) {
-        this.total_score = total_score;
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 
     public void setLastUpdated(String lastUpdated) {
@@ -67,7 +67,7 @@ public class Leaderboard {
     public String toString() {
         return "Leaderboard{" +
                 "id=" + id +
-                ", total_score=" + total_score +
+                ", totalScore=" + totalScore +
                 ", lastUpdated='" + lastUpdated + '\'' +
                 ", user=" + (user!=null?user.getId():"user invalid") +
                 '}';

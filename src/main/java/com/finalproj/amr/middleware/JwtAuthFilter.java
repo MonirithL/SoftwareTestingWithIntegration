@@ -1,11 +1,10 @@
 package com.finalproj.amr.middleware;
 
-import com.finalproj.amr.jsonObject.UserJwt;
+import com.finalproj.amr.jsonEntity.UserJwt;
 import com.finalproj.amr.utils.JwtUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
