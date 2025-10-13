@@ -43,7 +43,7 @@ public class WordController {
     @Scheduled(fixedDelay = 5000)
     void word_availability_checker() {
         int sanity = 0;
-        while (cache_word.size() < 10 && sanity<1000){
+        while (cache_word.size() < 5 && sanity<1000){
             Word word = WordService.generateWord();
             if(!word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())){
                 cache_word.put(word.getWord(),word);
