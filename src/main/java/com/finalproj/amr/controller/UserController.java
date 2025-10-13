@@ -19,6 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    //return a username with jwt
     @GetMapping("/username")
     public ResponseEntity<String> getUsername(HttpServletRequest request) {
         Object userIdObj = request.getAttribute("user_id");

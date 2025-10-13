@@ -19,9 +19,6 @@ public class WordController {
     private Map<String, Word> cache_word;
     private final Random random = new Random(38917248);
 
-    public Map<String, Word> getCache_word() {
-        return cache_word;
-    }
 
     public WordController(WordService wordService) {
         cache_word = new HashMap<>();
@@ -33,6 +30,7 @@ public class WordController {
         word_availability_checker();
     }
 
+    //return a word from cache
     @GetMapping()
     public Word getWord(){
         int num=random.nextInt(1,cache_word.size());
@@ -41,6 +39,7 @@ public class WordController {
         return selected;
     }
 
+    //cron job for caching the word
     @Scheduled(fixedDelay = 5000)
     void word_availability_checker() {
         int sanity = 0;

@@ -21,7 +21,7 @@ public class AuthController {
     }
 
 
-
+    //take data, return user, add cookie
     @PostMapping("/register")
     public User Register(@RequestBody Map<String, String> body, HttpServletResponse res) {
         User newUser = new User(body.get("username"), body.get("email"), body.get("password"));
@@ -30,7 +30,7 @@ public class AuthController {
         res.setStatus(200);
         return createdUser;
     }
-
+    //on success, add cookie
     @PostMapping("/login")
     public String Login(@RequestBody Map<String, String> body, HttpServletResponse response) {
         Optional<User> user = userService.checkUserLogin(body.get("email"), body.get("password"));
@@ -43,6 +43,7 @@ public class AuthController {
         return "Login successful ";
     }
 
+    //remove cookie, so user is logged out
     @PostMapping("/logout")
     public String Logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("access-token", null);

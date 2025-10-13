@@ -2,11 +2,12 @@ This project is a contribution of:
 
 - Lim Ankim
 - Leng Monirith
-- Teng RithTengRatanak
+- Teng RithRatanak
 
 # Get Started
 
 - copy and paste the application.properties (remove the .) and add your own port, db_name, username, password
+- for frontend(clone another branch): git checkout frontend > npm install > npm run dev
 
 ## Requirements
 
@@ -43,16 +44,13 @@ API Integration:
 
 - [x] post("/auth/logout) = clear http cookie for /api
 
-put("/games") - add game info
+- [x] put("/game/save") - add game info
 [new Game()]
 
-get("/games") - get games history
-[List<Game> games]
-
-get("/leaderboard") - get all leaderboards with user
+- [x] get("/leaderboard") - get all leaderboards with user
 [user_id, score, date_updated. user_id->username]
 
-put("/leaderboard) - add or increase users score on the leaderboard
+- [x] put("/leaderboard) - add or increase users score on the leaderboard
 [user_id, score]
 
 - [x] get("/word") - get a word from an api with definition
@@ -69,16 +67,14 @@ put("/leaderboard) - add or increase users score on the leaderboard
 - [x] login-check(req, res)->status 200 | json ok
   [Read the cookie, check if user exists]
 
-addGame(game)-> Game
+- [x] addGame(game)-> Game
 [Create game in db, belonging to user_id]
 
-getGames()-> List<Games>
+- [x] getGames()-> List<Games>
 [Read db and get a list of Games history by user]
 
-addScoreToLeaderboard(leaderboard)->leaderboard
-[Create leaderboard score in db]
 
-getLeaderboard()->List<Leaderboard>
+- [x] getLeaderboard()->List<Leaderboard>
 [Get leaderboard score and also join user_id with username and ORDER DESC, LIMIT 50]
 
 - [x] getWord()-> Word{word:"word", definition:"definition"}
@@ -128,7 +124,7 @@ _(JWT AUTH FILTER MAY BE REMOVED BEFORE TESTING TO EVAL BEHAIVOR WITHOUT AUTH, i
 
 #### Word Controller
 
-- get word: check if return a valid word
+- get word: check if return a valid word(cancelled due to runtime nature)
 
 #### Game Controller
 

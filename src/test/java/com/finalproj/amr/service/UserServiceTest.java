@@ -30,7 +30,7 @@ public class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Sample user
+
         user1 = new User(1, "Ankim", "ankim@gmail.com", "pass123");
         user2 = new User(2, "Rith", "rith@gmail.com", "pass123");
     }
@@ -60,8 +60,7 @@ public class UserServiceTest {
         Optional<User> user = userService.getUserById(1);
         assertTrue(user.isPresent());
         assertEquals("Ankim",user.get().getUsername());
-//        Fail result below if want to test
-//        assertEquals("Rith",user.get().getUsername());
+
         verify(userRepository, times(1)).findById(1);
     }
 

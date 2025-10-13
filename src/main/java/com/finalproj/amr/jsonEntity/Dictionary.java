@@ -46,6 +46,8 @@ public class Dictionary {
         return meanings.getFirst().getPartOfSpeech();
     }
 
+
+    //get dictionary from api, like get the meaning
     public static Dictionary getDictionary(String randWord){
         String encodedWord = URLEncoder.encode(randWord, StandardCharsets.UTF_8);
         HttpClient httpClient = HttpClient.newHttpClient();

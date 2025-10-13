@@ -33,7 +33,7 @@ public class LeaderboardService {
         this.leaderboardRepository = leaderboardRepository;
         this.gameRepository = gameRepository;
     }
-
+    //update to existing leaderboard
     public void updateLeaderboard(User user) {
         List<Game> userGames = gameRepository.findByUser(user);
 
@@ -55,7 +55,7 @@ public class LeaderboardService {
 
         leaderboardRepository.save(leaderboard);
     }
-
+    //get all board
     public List<Leaderboard> getLeaderBoard() {
         return leaderboardRepository.findAll(Sort.by(Sort.Direction.DESC, "totalScore"));
     }

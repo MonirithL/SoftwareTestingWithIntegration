@@ -30,14 +30,14 @@ public class UserControllerTest {
 
     @Test
     void getUsername_success() throws Exception {
-        // Arrange
+
         User fakeUser = new User();
         fakeUser.setId(1);
         fakeUser.setUsername("guest1");
 
         given(userService.getUserById(1)).willReturn(Optional.of(fakeUser));
 
-        // Act & Assert
+
         mockMvc.perform(get("/api/user/username")
                         .requestAttr("user_id", 1))
                 .andExpect(status().isOk())

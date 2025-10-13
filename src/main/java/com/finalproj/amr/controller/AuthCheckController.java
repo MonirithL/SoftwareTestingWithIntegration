@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthCheckController {
     public AuthCheckController() {
     }
-
+    //for auth checking, it needs jwt filter OK for it to return
     @GetMapping("/api/authCheck")
     public String Check(){
         return "Valid token";

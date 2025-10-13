@@ -51,7 +51,7 @@ public class LeaderboardServiceTest {
         when(leaderboardRepository.findByUser(user1)).thenReturn(Optional.empty());
 
         leaderboardService.updateLeaderboard(user1);
-        // Capture the leaderboard that is saved
+
         verify(leaderboardRepository, times(1)).save(argThat(leaderboard ->
                 leaderboard.getUser().equals(user1) &&
                         leaderboard.getTotalScore() == 120 &&            // 50 + 70
