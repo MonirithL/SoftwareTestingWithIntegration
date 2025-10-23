@@ -1,6 +1,7 @@
 package com.finalproj.amr.entity;
 
 import com.finalproj.amr.jsonEntity.Dictionary;
+import com.finalproj.amr.jsonEntity.Dictionary2;
 import com.finalproj.amr.jsonEntity.RandomWord;
 
 public class Word{
@@ -14,6 +15,12 @@ public class Word{
         this.category = randomWord.getCategory();
         this.definition = dict.getDefinition();
         this.partOfSpeech = dict.getPartOfSpeech();
+    }
+    public Word(Dictionary2 dict2, RandomWord randomWord){
+        this.word = dict2.getWord();
+        this.category = randomWord.getCategory();
+        this.definition = dict2.getDefinition();
+        this.partOfSpeech = dict2.getPartOfSpeech();
     }
 
     public Word() {

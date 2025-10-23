@@ -53,16 +53,17 @@ public class Dictionary {
 
         try{
             HttpRequest getRequest = HttpRequest.newBuilder()
-                    .uri(new URI("https://api.dictionaryapi.dev/api/v2/entries/en/"+encodedWord)).build();
+                    .uri(new URI("https://api.opendictionaryapi.com/entries/en/"+encodedWord)).build();
             HttpResponse<String> getResponse =
                     httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
             if (getResponse.statusCode() == 200) {
                 String jsonBody = getResponse.body();
-                Dictionary[] dict = gson.fromJson(jsonBody, Dictionary[].class);
-
-                if (dict != null && dict.length > 0 && dict[0] != null) {
-                        return dict[0];
-                }
+//                Dictionary[] dict = gson.fromJson(jsonBody, Dictionary[].class);
+//
+//                if (dict != null && dict.length > 0 && dict[0] != null) {
+//                        return dict[0];
+//                }
+                System.out.println(jsonBody);
             }
 
         } catch (URISyntaxException | IOException | InterruptedException e) {
@@ -107,3 +108,4 @@ class Definition {
                 '}';
     }
 }
+

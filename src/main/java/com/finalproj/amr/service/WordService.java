@@ -3,6 +3,7 @@ package com.finalproj.amr.service;
 
 import com.finalproj.amr.entity.Word;
 import com.finalproj.amr.jsonEntity.Dictionary;
+import com.finalproj.amr.jsonEntity.Dictionary2;
 import com.finalproj.amr.jsonEntity.RandomWord;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
@@ -54,20 +55,34 @@ public class WordService {
                     RandomWord[] randWord = gson.fromJson(jsonBody, RandomWord[].class);
 
                     if (randWord != null && randWord.length > 0 && randWord[0] != null) {
-                        if(randWord[0].checkCateg()){
-                            Dictionary newDict = Dictionary.getDictionary(randWord[0].getWord());
-                            if(newDict!=null){
-                                return new Word(newDict, randWord[0]);
-                            }
+                        String wordText = randWord[0].getWord();
+                        System.out.println("Fetched word: " + wordText);
+
+                        if (!randWord[0].checkCateg()) {
+                            System.out.println("Rejected word '" + wordText + "' due to category check");
+                            continue;
                         }
+
+                        Dictionary2 newDict = Dictionary2.getDictionary(wordText);
+                        if (newDict == null) {
+                            System.out.println("Rejected word '" + wordText + "' because dictionary lookup returned null");
+                            continue;
+                        }
+
+                        System.out.println("Accepted word: " + wordText);
+                        return new Word(newDict, randWord[0]);
+                    } else {
+                        System.out.println("No valid word found in API response");
                     }
+                } else {
+                    System.out.println("Non-200 response: " + getResponse.statusCode());
                 }
             } catch (Exception e) {
                 System.err.println("Request failed, retrying... " + e.getMessage());
             }
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
                 throw new RuntimeException("Interrupted while waiting to retry", ie);
