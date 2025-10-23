@@ -13,6 +13,8 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/word")
 public class WordController {
+    private int CACHE_SIZE = 5;
+    private int CACHE_MAX = 100;
 
     private WordService wordService;
 
@@ -44,20 +46,35 @@ public class WordController {
     @Scheduled(fixedDelay = 5000)
     void word_availability_checker() {
         int sanity = 0;
-        while (cache_word.size() < 5 && sanity<1000){
+        int wordsAddedThisRun = 0; // track how many words added this run
+        int maxWordsPerRun = 5;
+
+        while (wordsAddedThisRun < maxWordsPerRun && sanity < 20) {
             Word word = wordService.generateWord();
             if (word == null || word.getWord() == null || word.getDefinition() == null) {
                 sanity++;
                 continue;
             }
 
-            if (!word.getDefinition().toLowerCase().contains(word.getWord().toLowerCase())) {
-                cache_word.put(word.getWord(), word);
-                System.out.println("UPDATED ----------------------- CACHE WORDS CONTAINS " + cache_word.size() + " items");
+            String key = word.getWord().toLowerCase();
+
+            // skip duplicates in cache
+            if (cache_word.containsKey(key)) {
+                sanity++;
+                continue;
             }
+
+            // optional: skip if definition contains the word itself
+            if (!word.getDefinition().toLowerCase().contains(key)) {
+                cache_word.put(key, word);
+                wordsAddedThisRun++;
+                System.out.println("ADDED WORD: " + key + " | Cache size: " + cache_word.size());
+            }
+
             sanity++;
         }
-        System.out.println("Tries of "+ sanity+ " times!");
+
+        System.out.println("Tries this run: " + sanity + " | Words added this run: " + wordsAddedThisRun);
     }
 }
 
