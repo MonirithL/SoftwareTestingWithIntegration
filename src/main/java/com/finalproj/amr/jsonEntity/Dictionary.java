@@ -40,10 +40,10 @@ public class Dictionary {
                 '}';
     }
     public String getDefinition(){
-        return meanings.getFirst().getDefinitions().get(0).getDefinition();
+        return meanings.get(0).getDefinitions().get(0).getDefinition();
     }
     public String getPartOfSpeech(){
-        return meanings.getFirst().getPartOfSpeech();
+        return meanings.get(0).getPartOfSpeech();
     }
 
     public static Dictionary getDictionary(String randWord){
