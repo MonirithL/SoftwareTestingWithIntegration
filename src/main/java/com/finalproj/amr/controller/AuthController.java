@@ -47,7 +47,7 @@ public class AuthController {
     public String Logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("access-token", null);
         cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+        cookie.setSecure(false);
         cookie.setPath("/api");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
