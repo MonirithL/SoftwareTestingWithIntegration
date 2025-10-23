@@ -14,10 +14,10 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // allow all endpoints
-                        .allowedOrigins("*") // your React app origin
+                        .allowedOriginPatterns("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(true); // important if using cookies/sessions
+                        .allowCredentials(true);  // now valid
             }
         };
     }
