@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ForwardController {
 
-    @RequestMapping(value = "/{[path:[^\\.]*}")
+    @RequestMapping(value = "/{path:[^\\.]*}")
     public String forward() {
         // Forward to React's index.html
         return "forward:/index.html";
