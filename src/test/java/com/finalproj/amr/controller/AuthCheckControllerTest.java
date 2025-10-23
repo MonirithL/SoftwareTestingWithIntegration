@@ -31,7 +31,7 @@ public class AuthCheckControllerTest {
     @Test
     void authCheck_noJwt() throws Exception {
         mockMvc.perform(get("/api/authCheck"))
-                .andExpect(status().isOk())  // or 401 if security filter applied
+                .andExpect(status().isOk())
                 .andExpect(content().string("Valid token"));
     }
 
@@ -39,7 +39,7 @@ public class AuthCheckControllerTest {
     void authCheck_invalidJwt() throws Exception {
         mockMvc.perform(get("/api/authCheck")
                         .header("Authorization", "Bearer invalidtoken"))
-                .andExpect(status().isOk())  // change to 401 if filter rejects
+                .andExpect(status().isOk())
                 .andExpect(content().string("Valid token"));
     }
 }
